@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mais Digital — Marketing Digital com IA</title>
+  <meta name="description" content="Criamos posts, organizamos seu WhatsApp e montamos páginas simples para seu negócio atrair clientes com mais profissionalismo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dm-blue: #1A56DB;
+      --dm-blue-dark: #1341B0;
+      --dm-blue-light: #EBF2FF;
+      --dm-green: #16A34A;
+      --dm-green-light: #DCFCE7;
+      --dm-dark: #0F172A;
+      --dm-gray: #64748B;
+      --dm-light: #F8FAFC;
+      --dm-white: #FFFFFF;
+      --dm-border: #E2E8F0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--dm-dark);
+      background: var(--dm-white);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      height: 60px;
+      border-bottom: 1px solid var(--dm-border);
+      background: var(--dm-white);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 2rem;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Inter', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--dm-blue);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-logo span { color: var(--dm-dark); }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dm-gray);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--dm-blue); }
+
+    .nav-cta {
+      background: var(--dm-blue);
+      color: white !important;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 13px !important;
+      font-weight: 600 !important;
+    }
+
+    .nav-cta:hover { background: var(--dm-blue-dark); }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #0F172A 0%, #1e3a5f 100%);
+      color: white;
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(26,86,219,0.3) 0%, transparent 70%);
+      top: -100px; left: 50%; transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(26,86,219,0.2);
+      border: 1px solid rgba(26,86,219,0.4);
+      color: #93C5FD;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .badge-dot {
+      width: 6px; height: 6px;
+      background: #60A5FA;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: -0.8px;
+      margin-bottom: 1.2rem;
+      position: relative;
+    }
+
+    .hero h1 .accent { color: #60A5FA; }
+
+    .hero p {
+      font-size: 16px;
+      color: #94A3B8;
+      max-width: 520px;
+      margin: 0 auto 2rem;
+      position: relative;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .btn-primary {
+      background: var(--dm-blue);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 10px;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover { background: var(--dm-blue-dark); transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.25);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-outline:hover { background: rgba(255,255,255,0.08); }
+
+    /* STATS BAR */
+    .stats-bar {
+      background: var(--dm-white);
+      border-bottom: 1px solid var(--dm-border);
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--dm-blue);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--dm-gray);
+      margin-top: 2px;
+    }
+
+    /* CONTAINER */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* SECTIONS */
+    section { padding: 4rem 2rem; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--dm-blue);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      color: var(--dm-dark);
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-sub {
+      font-size: 15px;
+      color: var(--dm-gray);
+      max-width: 500px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* SERVICES */
+    .services-bg { background: var(--dm-light); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 2.5rem;
+    }
+
+    .service-card {
+      background: var(--dm-white);
+      border: 1px solid var(--dm-border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: all 0.2s;
+    }
+
+    .service-card:hover {
+      border-color: var(--dm-blue);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26,86,219,0.1);
+    }
+
+    .service-icon {
+      width: 44px; height: 44px;
+      background: var(--dm-blue-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 20px;
+    }
+
+    .service-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--dm-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .service-card p {
+      font-size: 13px;
+      color: var(--dm-gray);
+      line-height: 1.5;
+    }
+
+    /* PRICING */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 2.5rem;
+    }
+
+    .plan-card {
+      border: 1px solid var(--dm-border);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      background: var(--dm-white);
+      position: relative;
+    }
+
+    .plan-card.featured {
+      border-color: var(--dm-blue);
+      border-width: 2px;
+    }
+
+    .plan-badge {
+      position: absolute;
+      top: -12px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--dm-blue);
+      color: white;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .plan-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--dm-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 0.75rem;
+    }
+
+    .plan-price {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      margin-bottom: 1.25rem;
+    }
+
+    .plan-price .currency { font-size: 18px; font-weight: 700; color: var(--dm-dark); }
+    .plan-price .amount { font-family: 'Inter', sans-serif; font-size: 36px; font-weight: 800; color: var(--dm-dark); line-height: 1; }
+    .plan-price .period { font-size: 13px; color: var(--dm-gray); }
+
+    .plan-features {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .plan-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--dm-dark);
+      padding: 5px 0;
+    }
+
+    .plan-features li::before {
+      content: '✓';
+      color: var(--dm-green);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .plan-btn {
+      width: 100%;
+      padding: 11px;
+      border-radius: 9px;
+      border: 1.5px solid var(--dm-blue);
+      background: transparent;
+      color: var(--dm-blue);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .plan-btn:hover, .plan-card.featured .plan-btn {
+      background: var(--dm-blue);
+      color: white;
+    }
+
+    /* HOW IT WORKS */
+    .how-bg { background: var(--dm-light); }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .step-card { text-align: center; padding: 1.5rem 1rem; }
+
+    .step-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 40px;
+      font-weight: 800;
+      color: var(--dm-blue-light);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    .step-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--dm-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .step-card p {
+      font-size: 13px;
+      color: var(--dm-gray);
+      line-height: 1.5;
+    }
+
+    /* PORTFOLIO */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 2.5rem;
+    }
+
+    .portfolio-card {
+      border: 1px solid var(--dm-border);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--dm-white);
+      transition: all 0.2s;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .portfolio-thumb {
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: 800;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .portfolio-info { padding: 1rem 1.25rem; }
+
+    .portfolio-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--dm-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 0.3rem;
+    }
+
+    .portfolio-info h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--dm-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .portfolio-info p { font-size: 12px; color: var(--dm-gray); }
+
+    /* TESTIMONIALS */
+    .testimonials-bg { background: var(--dm-dark); color: white; }
+    .testimonials-bg .section-title { color: white; }
+    .testimonials-bg .section-sub { color: #94A3B8; }
+    .testimonials-bg .section-label { color: #60A5FA; }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 2.5rem;
+    }
+
+    .testimonial-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 1.5rem;
+    }
+
+    .testimonial-stars { color: #FBBF24; font-size: 14px; margin-bottom: 0.75rem; }
+
+    .testimonial-text {
+      font-size: 14px;
+      color: #CBD5E1;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .testimonial-author { display: flex; align-items: center; gap: 10px; }
+
+    .author-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .author-name { font-size: 13px; font-weight: 600; color: white; }
+    .author-biz { font-size: 12px; color: #64748B; }
+
+    /* CTA */
+    .cta-section {
+      background: var(--dm-blue);
+      color: white;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .cta-section .section-title { color: white; }
+    .cta-section p { color: rgba(255,255,255,0.8); font-size: 16px; margin-bottom: 2rem; }
+
+    .btn-white {
+      background: white;
+      color: var(--dm-blue);
+      padding: 13px 28px;
+      border-radius: 10px;
+      border: none;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .btn-white:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+
+
+    .future-space .stat-num {
+      font-size: 18px;
+    }
+
+    .placeholder-card {
+      opacity: 0.75;
+      border-style: dashed;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--dm-dark);
+      color: #94A3B8;
+      padding: 2.5rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      color: white;
+    }
+
+    .footer-logo span { color: var(--dm-blue); }
+    footer p { font-size: 12px; }
+
+    .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+
+    .footer-links a {
+      text-decoration: none;
+      color: #64748B;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: white; }
+
+    /* WHATSAPP FLOAT */
+    .wa-float {
+      position: fixed;
+      bottom: 20px; right: 20px;
+      background: #25D366;
+      color: white;
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      z-index: 999;
+      transition: transform 0.2s;
+      text-decoration: none;
+    }
+
+    .wa-float:hover { transform: scale(1.08); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Mais<span>Digital</span></div>
+    <ul class="nav-links">
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#portfolio">Exemplos</a></li>
+      <li><a href="#planos">Planos</a></li>
+      <li><a href="#contato" class="nav-cta">Fale conosco</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">
+    <div class="badge-dot"></div>
+    Marketing digital simples — Imperatriz, MA
+  </div>
+  <h1>Deixe sua empresa<br><span class="accent">mais profissional na internet</span></h1>
+  <p>Criamos posts, organizamos seu WhatsApp e montamos páginas simples para seu negócio atrair clientes com mais profissionalismo.</p>
+  <div class="hero-btns">
+    <a href="#planos" class="btn-primary">Ver planos →</a>
+    <a href="#como-funciona" class="btn-outline">Como funciona</a>
+  </div>
+</div>
+
+<!-- DIFERENCIAIS / ESPAÇO PARA ESTATÍSTICAS FUTURAS -->
+<div class="stats-bar future-space">
+  <div class="stat-item">
+    <div class="stat-num">IA</div>
+    <div class="stat-label">Criação mais rápida</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">Local</div>
+    <div class="stat-label">Foco em negócios da região</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">Simples</div>
+    <div class="stat-label">Planos fáceis de entender</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">Futuro</div>
+    <div class="stat-label">Espaço para resultados reais</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="servicos" class="services-bg">
+  <div class="container">
+  <div class="section-label">O que fazemos</div>
+  <div class="section-title">O básico bem feito<br>para seu negócio aparecer</div>
+  <div class="section-sub">Criamos uma presença digital clara, bonita e funcional para pequenos negócios.</div>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">📱</div>
+      <h3>Gestão de Instagram</h3>
+      <p>Posts, legendas e ideias de conteúdo para manter seu perfil ativo e profissional.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💬</div>
+      <h3>WhatsApp profissional</h3>
+      <p>Organizamos seu perfil comercial, catálogo, mensagens e informações principais.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌐</div>
+      <h3>Sites e landing pages</h3>
+      <p>Páginas simples para apresentar sua empresa, serviços, endereço e contato.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎨</div>
+      <h3>Identidade visual</h3>
+      <p>Cores, modelos de arte e visual básico para deixar sua marca mais organizada.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📣</div>
+      <h3>Anúncios pagos</h3>
+      <p>Campanhas simples no Instagram e Facebook para divulgar seus produtos ou serviços.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📊</div>
+      <h3>Relatório mensal</h3>
+      <p>Um resumo simples para acompanhar alcance, publicações e próximos ajustes.</p>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="planos">
+  <div class="container">
+  <div class="section-label">Planos</div>
+  <div class="section-title">Planos simples<br>para começar no digital</div>
+  <div class="section-sub">Escolha o pacote de acordo com a necessidade atual da sua empresa.</div>
+
+  <div class="pricing-grid">
+    <div class="plan-card">
+      <div class="plan-name">Básico</div>
+      <div class="plan-price">
+        <span class="currency">R$</span>
+        <span class="amount">397</span>
+        <span class="period">/mês</span>
+      </div>
+      <ul class="plan-features">
+        <li>12 posts por mês</li>
+        <li>Legendas simples</li>
+        <li>Calendário editorial</li>
+        <li>Bio profissional</li>
+        <li>WhatsApp Business configurado</li>
+      </ul>
+      <a href="#contato" class="plan-btn" style="display:block;text-align:center;text-decoration:none;">Contratar plano</a>
+    </div>
+
+    <div class="plan-card featured">
+      <div class="plan-badge">Mais popular</div>
+      <div class="plan-name">Intermediário</div>
+      <div class="plan-price">
+        <span class="currency">R$</span>
+        <span class="amount">797</span>
+        <span class="period">/mês</span>
+      </div>
+      <ul class="plan-features">
+        <li>Tudo do Básico</li>
+        <li>4 roteiros de Reels</li>
+        <li>Identidade visual básica</li>
+        <li>Google Meu Negócio</li>
+        <li>Artes promocionais</li>
+        <li>Relatório mensal</li>
+      </ul>
+      <a href="#contato" class="plan-btn" style="display:block;text-align:center;text-decoration:none;">Contratar plano</a>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-name">Premium</div>
+      <div class="plan-price">
+        <span class="currency">R$</span>
+        <span class="amount">1.597</span>
+        <span class="period">/mês</span>
+      </div>
+      <ul class="plan-features">
+        <li>Tudo do Intermediário</li>
+        <li>Anúncios pagos (Meta Ads)</li>
+        <li>Atendimento automático no WhatsApp</li>
+        <li>Site ou landing page</li>
+        <li>Organização do caminho de venda</li>
+        <li>Suporte prioritário</li>
+      </ul>
+      <a href="#contato" class="plan-btn" style="display:block;text-align:center;text-decoration:none;">Contratar plano</a>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="como-funciona" class="how-bg">
+  <div class="container">
+  <div class="section-label">Como funciona</div>
+  <div class="section-title">Processo simples<br>do começo ao fim</div>
+
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <h3>Você fala conosco</h3>
+      <p>Conversamos pelo WhatsApp para entender seu negócio e o que você precisa.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <h3>Planejamos juntos</h3>
+      <p>Definimos o estilo, os serviços principais e o que será criado primeiro.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <h3>Criamos tudo com IA</h3>
+      <p>Criamos textos, artes, páginas e configurações com apoio de IA.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <h3>Você aprova</h3>
+      <p>Você revisa o material antes de qualquer publicação ou entrega final.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">05</div>
+      <h3>Acompanhamento</h3>
+      <p>Acompanhamos os resultados e fazemos ajustes para melhorar a presença digital.</p>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="container">
+  <div class="section-label">Exemplos</div>
+  <div class="section-title">Exemplos do que<br>podemos criar</div>
+  <div class="section-sub">Modelos simples para mostrar como seu negócio pode aparecer melhor na internet.</div>
+
+  <div class="portfolio-grid">
+    <div class="portfolio-card">
+      <div class="portfolio-thumb" style="background:#FFF3E0;color:#E65100;">BC</div>
+      <div class="portfolio-info">
+        <div class="portfolio-tag">Barbearia</div>
+        <h3>Exemplo para Barbearia</h3>
+        <p>Posts, bio organizada e chamada para agendamento</p>
+      </div>
+    </div>
+    <div class="portfolio-card">
+      <div class="portfolio-thumb" style="background:#E8F5E9;color:#2E7D32;">SA</div>
+      <div class="portfolio-info">
+        <div class="portfolio-tag">Alimentação</div>
+        <h3>Exemplo para Lanchonete</h3>
+        <p>Cardápio digital, artes promocionais e WhatsApp organizado</p>
+      </div>
+    </div>
+    <div class="portfolio-card">
+      <div class="portfolio-thumb" style="background:#F3E5F5;color:#7B1FA2;">FS</div>
+      <div class="portfolio-info">
+        <div class="portfolio-tag">Beleza</div>
+        <h3>Exemplo para Salão</h3>
+        <p>Página simples, serviços e botão de contato</p>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-bg">
+  <div class="container">
+  <div class="section-label">Depoimentos</div>
+  <div class="section-title">O que dizem nossos clientes</div>
+  <div class="section-sub">Negócios reais, resultados reais.</div>
+
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"Antes o Instagram era uma bagunça. Agora tenho calendário, posts bonitos e os clientes comentam que acharam a gente pelo Insta. Valeu cada centavo."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:#1A56DB;">MR</div>
+        <div>
+          <div class="author-name">Marcos Ribeiro</div>
+          <div class="author-biz">Exemplo para Barbearia</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"Eles configuraram meu WhatsApp Business e criaram o cardápio digital em dois dias. Meu movimento aumentou muito, principalmente via zap."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:#16A34A;">AP</div>
+        <div>
+          <div class="author-name">Ana Paula</div>
+          <div class="author-biz">Exemplo para Lanchonete</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"Meu site ficou lindo e profissional. Já recebi clientes que disseram que me encontraram pelo Google. Nunca pensei que ia ser tão rápido assim."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:#7C3AED;">JS</div>
+        <div>
+          <div class="author-name">Josilene Santos</div>
+          <div class="author-biz">Exemplo para Salão</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div id="contato" class="cta-section">
+  <div class="container">
+  <div class="section-title">Quer melhorar a presença digital da sua empresa?</div>
+  <p>Fale conosco pelo WhatsApp e receba uma análise simples do seu perfil.</p>
+  <a href="https://wa.me/55XXXXXXXXXXX?text=Olá!%20Quero%20a%20análise%20gratuita%20do%20meu%20perfil." class="btn-white" target="_blank">Quero minha análise grátis →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Mais<span>Digital</span></div>
+    <p>© 2026 Mais Digital · Imperatriz, MA</p>
+    <ul class="footer-links">
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">WhatsApp</a></li>
+      <li><a href="#">Contato</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a class="wa-float" href="https://wa.me/55XXXXXXXXXXX" target="_blank" title="Falar no WhatsApp">💬</a>
+
+</body>
+</html>
