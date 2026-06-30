@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel — Mais Digital</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='26' fill='%231A56DB'/%3E%3Cpath d='M50 26v48M26 50h48' stroke='white' stroke-width='12' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/admin.css" />
+</head>
+<body class="admin-body">
+
+  <!-- ============ TELA DE LOGIN ============ -->
+  <section class="login-view" data-login-view>
+    <div class="login-card">
+      <a href="index.html" class="brand login-brand"><span class="brand-mark">+</span><span>Mais<span>Digital</span></span></a>
+      <h1>Painel interno</h1>
+      <p class="login-sub">Acesso restrito à equipe da Mais Digital.</p>
+
+      <form data-login-form>
+        <label>E-mail
+          <input type="email" name="email" placeholder="voce@maisdigital.com" autocomplete="username" required>
+        </label>
+        <label>Senha
+          <input type="password" name="password" placeholder="••••••••" autocomplete="current-password" required>
+        </label>
+        <button type="submit" class="btn btn-primary" data-login-btn>Entrar</button>
+        <p class="login-error" data-login-error></p>
+      </form>
+
+      <a href="index.html" class="login-back">← Voltar ao site</a>
+    </div>
+  </section>
+
+  <!-- ============ PAINEL (visível após login) ============ -->
+  <div class="admin-app" data-app hidden>
+
+    <header class="admin-topbar">
+      <a href="#" class="brand admin-brand"><span class="brand-mark">+</span><span>Mais<span>Digital</span></span> <em>painel</em></a>
+      <div class="admin-user">
+        <span data-user-email>—</span>
+        <button class="admin-btn ghost" data-logout>Sair</button>
+      </div>
+    </header>
+
+    <main class="admin-main container-wide">
+
+      <!-- DASHBOARD -->
+      <section class="dash-grid" aria-label="Resumo">
+        <article class="stat-card"><span class="stat-ico">👥</span><div><strong data-stat="total">0</strong><span>Total de clientes</span></div></article>
+        <article class="stat-card"><span class="stat-ico">✨</span><div><strong data-stat="leads">0</strong><span>Novos leads</span></div></article>
+        <article class="stat-card"><span class="stat-ico">🚧</span><div><strong data-stat="producao">0</strong><span>Em andamento</span></div></article>
+        <article class="stat-card"><span class="stat-ico">✅</span><div><strong data-stat="entregue">0</strong><span>Concluídos</span></div></article>
+        <article class="stat-card warn"><span class="stat-ico">⏳</span><div><strong data-stat="pendentes">0</strong><span>Pagamentos pendentes</span></div></article>
+        <article class="stat-card danger"><span class="stat-ico">⚠️</span><div><strong data-stat="atrasados">0</strong><span>Pagamentos atrasados</span></div></article>
+        <article class="stat-card revenue"><span class="stat-ico">💰</span><div><strong data-stat="receita">R$ 0</strong><span>Receita mensal prevista</span></div></article>
+        <article class="stat-card sources"><span class="stat-ico">📍</span><div><strong>De onde vieram</strong><div class="source-mini" data-source-breakdown></div></div></article>
+      </section>
+
+      <!-- TOOLBAR -->
+      <section class="toolbar">
+        <div class="toolbar-search">
+          <input type="search" placeholder="Buscar por nome, empresa ou WhatsApp..." data-search>
+        </div>
+        <div class="toolbar-filters">
+          <select data-filter="plan"><option value="">Todos os planos</option></select>
+          <select data-filter="project_status"><option value="">Todos os status</option></select>
+          <select data-filter="source"><option value="">Todas as origens</option></select>
+          <select data-filter="responsible"><option value="">Todos responsáveis</option></select>
+        </div>
+        <div class="toolbar-actions">
+          <button class="admin-btn ghost" data-export="csv">Exportar CSV</button>
+          <button class="admin-btn ghost" data-export="json">Exportar JSON</button>
+          <button class="admin-btn primary" data-new-client>+ Novo cliente</button>
+        </div>
+      </section>
+
+      <!-- LISTA DE CLIENTES -->
+      <section class="clients-wrap">
+        <table class="clients-table" data-clients-table>
+          <thead>
+            <tr>
+              <th>Cliente</th><th>Empresa</th><th>Origem</th><th>Plano</th>
+              <th>Status</th><th>Progresso</th><th>Resp.</th><th>Vencimento</th><th></th>
+            </tr>
+          </thead>
+          <tbody data-clients-body></tbody>
+        </table>
+        <p class="empty-state" data-empty hidden>Nenhum cliente encontrado. Clique em <strong>“+ Novo cliente”</strong> para começar.</p>
+      </section>
+    </main>
+  </div>
+
+  <!-- ============ MODAL CLIENTE (criar / editar / detalhes) ============ -->
+  <div class="modal-overlay" data-modal hidden>
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-head">
+        <h2 data-modal-title>Novo cliente</h2>
+        <button class="modal-close" data-modal-close aria-label="Fechar">✕</button>
+      </div>
+
+      <form data-client-form class="modal-body">
+        <input type="hidden" name="id">
+
+        <div class="form-grid">
+          <label>Nome do cliente <input name="client_name" required></label>
+          <label>Empresa <input name="company_name"></label>
+          <label>WhatsApp <input name="whatsapp" placeholder="(99) 99999-9999"></label>
+          <label>Instagram <input name="instagram" placeholder="@perfil"></label>
+          <label>Segmento <input name="segment" placeholder="Ex.: barbearia"></label>
+          <label>Cidade <input name="city"></label>
+
+          <label>Origem
+            <select name="source" data-options="sources"></select>
+          </label>
+          <label>Plano
+            <select name="plan" data-options="plans"></select>
+          </label>
+          <label>Status do projeto
+            <select name="project_status" data-options="statuses"></select>
+          </label>
+          <label>Responsável
+            <select name="responsible" data-options="responsibles"></select>
+          </label>
+
+          <label>Valor mensal (R$) <input type="number" name="monthly_value" step="0.01" min="0" placeholder="0,00"></label>
+          <label>Status do pagamento
+            <select name="payment_status" data-options="payments"></select>
+          </label>
+          <label>Data de início <input type="date" name="start_date"></label>
+          <label>Data de vencimento <input type="date" name="due_date"></label>
+        </div>
+
+        <label class="full">Observações <textarea name="notes" rows="3"></textarea></label>
+
+        <!-- CHECKLIST DE PROGRESSO -->
+        <div class="checklist-block">
+          <div class="checklist-head">
+            <h3>Progresso do projeto</h3>
+            <div class="progress-bar"><span data-progress-fill></span></div>
+            <strong data-progress-label>0%</strong>
+          </div>
+          <div class="checklist-grid" data-checklist></div>
+        </div>
+
+        <div class="modal-foot">
+          <button type="button" class="admin-btn ghost" data-modal-close>Cancelar</button>
+          <button type="submit" class="admin-btn primary" data-save-btn>Salvar cliente</button>
+        </div>
+        <p class="modal-error" data-modal-error></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============ MODAL CONFIRMAR EXCLUSÃO ============ -->
+  <div class="modal-overlay" data-confirm hidden>
+    <div class="modal small" role="alertdialog" aria-modal="true">
+      <div class="modal-head"><h2>Excluir cliente?</h2></div>
+      <div class="modal-body">
+        <p>Tem certeza que deseja excluir <strong data-confirm-name>este cliente</strong>? Esta ação não pode ser desfeita.</p>
+        <div class="modal-foot">
+          <button class="admin-btn ghost" data-confirm-cancel>Cancelar</button>
+          <button class="admin-btn danger" data-confirm-ok>Sim, excluir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supabase via CDN → config → lógica do painel -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>

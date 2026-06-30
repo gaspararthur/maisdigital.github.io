@@ -1,0 +1,154 @@
+/* ============================================================
+   PAINEL ADMINISTRATIVO — Mais Digital
+   Usa as variáveis de cor definidas em styles.css (:root).
+   ============================================================ */
+.admin-body { background: #0b1220; color: var(--dark); }
+
+/* ---------- LOGIN ---------- */
+.login-view { min-height: 100vh; display: grid; place-items: center; padding: 24px;
+  background: radial-gradient(circle at 20% 0%, rgba(26,86,219,.35), transparent 45%),
+              radial-gradient(circle at 100% 100%, rgba(6,182,212,.25), transparent 45%), #0b1220; }
+.login-card { width: min(420px, 100%); padding: 38px 32px; border-radius: 28px; background: rgba(255,255,255,.97);
+  box-shadow: 0 30px 80px rgba(0,0,0,.45); border: 1px solid rgba(255,255,255,.6); }
+.login-brand { font-size: 22px; margin-bottom: 22px; }
+.login-card h1 { font-size: 26px; letter-spacing: -.04em; }
+.login-sub { color: var(--muted); font-size: 14px; margin: 6px 0 24px; }
+.login-card form { display: grid; gap: 14px; }
+.login-card label { display: grid; gap: 6px; font-size: 13px; font-weight: 700; color: var(--dark); }
+.login-card input { height: 48px; border: 1px solid var(--border); border-radius: 14px; padding: 0 14px; font: inherit; outline: none; }
+.login-card input:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(26,86,219,.15); }
+.login-card .btn { width: 100%; margin-top: 4px; }
+.login-error { color: #DC2626; font-size: 13px; min-height: 18px; font-weight: 600; }
+.login-back { display: block; text-align: center; margin-top: 18px; color: var(--muted); font-size: 13px; }
+.login-back:hover { color: var(--blue); }
+
+/* ---------- LAYOUT DO PAINEL ---------- */
+.admin-app { min-height: 100vh; background: #f1f5f9; color: var(--dark); }
+.container-wide { width: min(1280px, calc(100% - 40px)); margin: 0 auto; }
+.admin-topbar { position: sticky; top: 0; z-index: 40; display: flex; align-items: center; justify-content: space-between;
+  height: 64px; padding: 0 22px; background: #0f172a; color: white; }
+.admin-brand { color: white; font-size: 18px; gap: 8px; }
+.admin-brand em { font-style: normal; font-weight: 600; font-size: 12px; color: #93C5FD; background: rgba(147,197,253,.14);
+  padding: 3px 8px; border-radius: 999px; letter-spacing: .1em; text-transform: uppercase; }
+.admin-user { display: flex; align-items: center; gap: 14px; font-size: 13px; color: #CBD5E1; }
+.admin-main { padding: 26px 0 60px; }
+
+/* ---------- BOTÕES ---------- */
+.admin-btn { height: 42px; padding: 0 16px; border-radius: 12px; border: 1px solid transparent; font: inherit;
+  font-weight: 700; font-size: 14px; cursor: pointer; transition: transform .15s, box-shadow .15s, background .15s, color .15s; }
+.admin-btn:hover { transform: translateY(-1px); }
+.admin-btn.primary { background: linear-gradient(135deg, var(--blue), var(--blue-2)); color: white; box-shadow: 0 10px 24px rgba(26,86,219,.28); }
+.admin-btn.ghost { background: white; border-color: var(--border); color: var(--dark); }
+.admin-btn.ghost:hover { border-color: var(--blue); color: var(--blue); }
+.admin-btn.danger { background: #DC2626; color: white; }
+.admin-topbar .admin-btn.ghost { background: rgba(255,255,255,.1); color: white; border-color: rgba(255,255,255,.2); }
+
+/* ---------- DASHBOARD ---------- */
+.dash-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 22px; }
+.stat-card { display: flex; gap: 14px; align-items: center; padding: 20px; border-radius: 20px; background: white;
+  border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(15,23,42,.05); }
+.stat-ico { width: 48px; height: 48px; flex: 0 0 48px; display: grid; place-items: center; border-radius: 14px;
+  background: var(--soft); font-size: 22px; }
+.stat-card strong { display: block; font-size: 26px; letter-spacing: -.04em; line-height: 1.1; }
+.stat-card span { color: var(--muted); font-size: 13px; }
+.stat-card.warn .stat-ico { background: #FEF3C7; }
+.stat-card.danger .stat-ico { background: #FEE2E2; }
+.stat-card.revenue { background: linear-gradient(135deg, #0f172a, #172554); color: white; border-color: transparent; }
+.stat-card.revenue span { color: #93C5FD; }
+.stat-card.revenue .stat-ico { background: rgba(255,255,255,.12); }
+.stat-card.sources { grid-column: span 2; align-items: flex-start; }
+.source-mini { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.source-mini span { font-size: 12px; padding: 4px 9px; border-radius: 999px; background: var(--soft); color: var(--muted); }
+.source-mini b { color: var(--blue); }
+.source-mini .muted { background: none; }
+
+/* ---------- TOOLBAR ---------- */
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 16px; }
+.toolbar-search { flex: 1 1 240px; }
+.toolbar-search input { width: 100%; height: 44px; border: 1px solid var(--border); border-radius: 12px; padding: 0 14px; font: inherit; outline: none; background: white; }
+.toolbar-search input:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(26,86,219,.12); }
+.toolbar-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.toolbar-filters select { height: 44px; border: 1px solid var(--border); border-radius: 12px; padding: 0 12px; font: inherit; background: white; color: var(--dark); cursor: pointer; }
+.toolbar-actions { display: flex; gap: 8px; margin-left: auto; }
+
+/* ---------- TABELA ---------- */
+.clients-wrap { background: white; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(15,23,42,.05); }
+.clients-table { width: 100%; border-collapse: collapse; }
+.clients-table thead th { text-align: left; padding: 14px 16px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--muted); background: var(--soft); border-bottom: 1px solid var(--border); }
+.clients-table tbody td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 14px; vertical-align: middle; }
+.clients-table tbody tr:hover { background: #f8fafc; }
+.clients-table tbody tr:last-child td { border-bottom: none; }
+.row-progress { width: 90px; height: 8px; border-radius: 999px; background: var(--border); overflow: hidden; display: inline-block; vertical-align: middle; }
+.row-progress span { display: block; height: 100%; background: linear-gradient(90deg, var(--blue), var(--cyan)); }
+.row-actions { white-space: nowrap; text-align: right; }
+.icon-btn { width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--border); background: white; cursor: pointer; font-size: 15px; transition: .15s; }
+.icon-btn:hover { border-color: var(--blue); transform: translateY(-1px); }
+.icon-btn.danger:hover { border-color: #DC2626; background: #FEE2E2; }
+.empty-state { padding: 40px; text-align: center; color: var(--muted); }
+
+/* Badges de status */
+.badge { display: inline-block; padding: 5px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; background: var(--soft); color: var(--muted); }
+.badge.stnovolead { background: #DBEAFE; color: #1D4ED8; }
+.badge.stemconversa { background: #E0F2FE; color: #0369A1; }
+.badge.stpropostaenviada { background: #FEF3C7; color: #B45309; }
+.badge.stfechado { background: #DCFCE7; color: #15803D; }
+.badge.stemproduo { background: #EDE9FE; color: #6D28D9; }
+.badge.staguardandocliente { background: #FFE4E6; color: #BE123C; }
+.badge.stentregue { background: #D1FAE5; color: #047857; }
+.badge.stperdidocancelado { background: #F1F5F9; color: #64748B; }
+
+/* ---------- MODAL ---------- */
+.modal-overlay { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 20px;
+  background: rgba(2,6,23,.6); backdrop-filter: blur(4px); animation: fadeIn .15s ease; }
+/* O atributo `hidden` precisa vencer o display:grid acima */
+.modal-overlay[hidden] { display: none; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modal { width: min(760px, 100%); max-height: 92vh; overflow: auto; background: white; border-radius: 24px;
+  box-shadow: 0 40px 90px rgba(0,0,0,.4); animation: pop .18s ease; }
+.modal.small { width: min(440px, 100%); }
+@keyframes pop { from { transform: translateY(12px) scale(.98); opacity: 0; } to { transform: none; opacity: 1; } }
+.modal-head { display: flex; align-items: center; justify-content: space-between; padding: 22px 24px; border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; background: white; z-index: 1; }
+.modal-head h2 { font-size: 20px; letter-spacing: -.03em; }
+.modal-close { width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--border); background: white; cursor: pointer; font-size: 14px; }
+.modal-close:hover { border-color: #DC2626; color: #DC2626; }
+.modal-body { padding: 24px; }
+.form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.modal label { display: grid; gap: 6px; font-size: 13px; font-weight: 700; color: var(--dark); }
+.modal label.full { margin-top: 14px; }
+.modal input, .modal select, .modal textarea { border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; font: inherit; outline: none; background: white; color: var(--dark); }
+.modal input:focus, .modal select:focus, .modal textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(26,86,219,.12); }
+.modal-foot { display: flex; justify-content: flex-end; gap: 10px; margin-top: 22px; }
+.modal-error { color: #DC2626; font-size: 13px; margin-top: 10px; font-weight: 600; }
+
+/* Checklist */
+.checklist-block { margin-top: 24px; padding-top: 20px; border-top: 1px dashed var(--border); }
+.checklist-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.checklist-head h3 { font-size: 16px; }
+.checklist-head .progress-bar { flex: 1; height: 10px; border-radius: 999px; background: var(--border); overflow: hidden; }
+.checklist-head .progress-bar span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--blue), var(--cyan)); transition: width .25s; }
+.checklist-head strong { color: var(--blue); font-size: 16px; min-width: 44px; text-align: right; }
+.checklist-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.check-item { display: flex !important; flex-direction: row !important; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--border);
+  border-radius: 12px; font-weight: 500 !important; font-size: 13px; cursor: pointer; transition: .15s; }
+.check-item:hover { border-color: var(--blue); background: #f8fafc; }
+.check-item input { width: 18px; height: 18px; accent-color: var(--blue); cursor: pointer; }
+.check-item:has(input:checked) { background: #EFF6FF; border-color: rgba(26,86,219,.4); }
+
+/* ---------- RESPONSIVO ---------- */
+@media (max-width: 1100px) { .dash-grid { grid-template-columns: repeat(2, 1fr); } .stat-card.sources { grid-column: span 2; } }
+@media (max-width: 760px) {
+  .form-grid, .checklist-grid { grid-template-columns: 1fr; }
+  .toolbar-actions { margin-left: 0; width: 100%; }
+  .toolbar-actions .admin-btn { flex: 1; }
+
+  /* Tabela vira cards no celular */
+  .clients-table thead { display: none; }
+  .clients-table, .clients-table tbody, .clients-table tr, .clients-table td { display: block; width: 100%; }
+  .clients-table tr { padding: 8px 4px; border-bottom: 8px solid #f1f5f9; }
+  .clients-table td { border: none; padding: 7px 16px; display: flex; justify-content: space-between; gap: 16px; text-align: right; }
+  .clients-table td::before { content: attr(data-label); font-weight: 700; color: var(--muted); text-align: left; }
+  .row-actions { justify-content: flex-end; }
+}
+@media (max-width: 480px) { .dash-grid { grid-template-columns: 1fr; } .stat-card.sources { grid-column: span 1; } }
