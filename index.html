@@ -198,7 +198,7 @@
               <li>Legendas e calendário simples</li>
               <li>WhatsApp Business inicial</li>
             </ul>
-            <a href="#contato" class="plan-button">Contratar plano</a>
+            <a href="#contato" class="plan-button" data-plan-id="presenca" data-plan-name="Presença Digital">Contratar plano</a>
           </article>
 
           <article class="plan-card featured reveal delay-1">
@@ -213,7 +213,7 @@
               <li>Formulário de orçamento ou agendamento</li>
               <li>Relatório mensal</li>
             </ul>
-            <a href="#contato" class="plan-button filled">Contratar plano</a>
+            <a href="#contato" class="plan-button filled" data-plan-id="atendimento" data-plan-name="Atendimento Inteligente">Contratar plano</a>
           </article>
 
           <article class="plan-card reveal delay-2">
@@ -227,7 +227,7 @@
               <li>Mensagens de pós-venda e lembretes</li>
               <li>Dashboard simples de acompanhamento</li>
             </ul>
-            <a href="#contato" class="plan-button">Contratar plano</a>
+            <a href="#contato" class="plan-button" data-plan-id="automacao" data-plan-name="Automação Comercial">Contratar plano</a>
           </article>
         </div>
 
@@ -238,8 +238,10 @@
             <p>Ideal para quem precisa de apenas algumas entregas específicas, como site, automação, WhatsApp, tráfego ou organização comercial.</p>
           </div>
           <div class="custom-price"><span>A partir de</span><strong>R$ 300</strong><small>/mês</small></div>
-          <a href="#contato" class="btn btn-primary">Montar meu plano</a>
+          <a href="#contato" class="btn btn-primary" data-plan-id="customizado" data-plan-name="Plano Customizado">Montar meu plano</a>
         </article>
+
+        <p class="plans-note reveal">🔒 Assinatura mensal recorrente · pague no cartão, Pix ou boleto · cancele quando quiser.</p>
       </div>
     </section>
 
@@ -353,6 +355,10 @@
           <label>Principal desafio hoje (opcional)
             <input type="text" name="challenge" placeholder="Ex.: demoro a responder no WhatsApp">
           </label>
+          <label class="consent-label">
+            <input type="checkbox" name="consent" required>
+            <span>Concordo em ser contatado e li a <a href="privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
+          </label>
           <button class="btn btn-primary" type="submit">Solicitar análise</button>
           <p class="form-note" data-form-note aria-live="polite">Resposta rápida no WhatsApp. Seus dados são usados apenas para o contato.</p>
         </form>
@@ -369,11 +375,14 @@
         <a href="quem-somos.html">Quem somos nós?</a>
         <a href="#planos">Planos</a>
         <a href="#contato">Contato</a>
+        <a href="privacidade.html">Privacidade</a>
+        <a href="termos.html">Termos</a>
       </div>
     </div>
   </footer>
 
   <a class="wa-float" href="https://wa.me/55XXXXXXXXXXX" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">💬</a>
+  <script src="assets/js/analytics.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
