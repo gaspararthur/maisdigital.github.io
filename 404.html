@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Página não encontrada · Mais Digital</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html, body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        canvas {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem 1.5rem;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .error-code {
+            font-family: 'Courier Prime', monospace;
+            font-size: 6rem;
+            font-weight: 700;
+            color: #ff030385;
+            line-height: 1;
+            letter-spacing: -0.04em;
+            opacity: 0.9;
+            text-shadow: 0 0 40px rgba(0,154,166,0.3);
+        }
+
+        .error-icon {
+            font-size: 2rem;
+            color: #ffffff;
+        }
+
+        .error-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ddd;
+            letter-spacing: -0.02em;
+        }
+
+        .error-desc {
+            font-size: 0.85rem;
+            color: #ffffff;
+            line-height: 1.7;
+            max-width: 300px;
+        }
+
+        .error-formula {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.78rem;
+            color: #ffffff;
+            padding: 8px 16px;
+            border: 1px solid #1a1a1a;
+            border-radius: 6px;
+            background: #0d0d0d;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: 8px;
+            border: 1px solid rgb(255, 255, 255);
+            background: rgba(0, 0, 0, 0.08);
+            color: #c22f2f;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+            margin-top: 0.4rem;
+        }
+
+        .btn-home:hover {
+            background: rgba(0,154,166,0.14);
+            border-color: #8f2020;
+        }
+
+        .btn-home:focus-visible { outline: 2px solid #446769; outline-offset: 2px; }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+    <div class="container">
+        <p class="error-code">404</p>
+        <i class="fa-solid fa-flask-vial error-icon" aria-hidden="true"></i>
+        <h1 class="error-title">Página não encontrada</h1>
+        <p class="error-desc">
+            Essa URL não existe no site da Mais Digital — talvez tenha sido movida, deletada,
+            ou você digitou algo errado.
+        </p>
+        <span class="error-formula">ERROR: page_not_found = null</span>
+        <a class="btn-home" href="/">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            Voltar ao início
+        </a>
+    </div>
+
+</body>
+</html>

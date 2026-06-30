@@ -5,14 +5,15 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const root = path.join(__dirname, '..');
-const frontendPath = path.join(root, 'frontend');
+// O front-end fica na raiz do projeto (index.html, quem-somos.html, assets/).
+const frontendPath = root;
 const leadsFile = path.join(__dirname, 'data', 'leads.jsonl');
 
 app.use(express.json());
 app.use(express.static(frontendPath));
 
 app.post('/api/leads', (req, res) => {
-  const { name, phone, business, plan } = req.body || {};
+  const { name, phone, business, plan, challenge } = req.body || {};
 
   if (!name || !phone) {
     return res.status(400).json({ ok: false, message: 'Nome e WhatsApp são obrigatórios.' });
@@ -23,6 +24,7 @@ app.post('/api/leads', (req, res) => {
     phone: String(phone).trim(),
     business: String(business || '').trim(),
     plan: String(plan || '').trim(),
+    challenge: String(challenge || '').trim(),
     createdAt: new Date().toISOString()
   };
 
