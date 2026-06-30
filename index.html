@@ -383,6 +383,35 @@
   </footer>
 
   <a class="wa-float" href="https://wa.me/55XXXXXXXXXXX" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">💬</a>
+
+  <!-- Mini-formulário antes do pagamento (coleta o que o cliente pediu) -->
+  <div class="co-modal" data-checkout-modal hidden>
+    <div class="co-box" role="dialog" aria-modal="true" aria-labelledby="co-title">
+      <button class="co-close" data-co-close aria-label="Fechar">✕</button>
+      <span class="section-kicker">Quase lá</span>
+      <h3 id="co-title">Contratar <span data-co-plan>plano</span></h3>
+      <p class="co-sub">Plano <strong data-co-value></strong>. Preencha para já começarmos com o seu projeto certo — depois você é levado ao pagamento seguro.</p>
+      <form data-checkout-form>
+        <label>E-mail <small>(use o mesmo no pagamento)</small>
+          <input type="email" name="email" placeholder="voce@email.com" required>
+        </label>
+        <div class="co-grid">
+          <label>Seu nome <input type="text" name="client_name" required></label>
+          <label>Empresa <input type="text" name="company_name"></label>
+          <label>WhatsApp <input type="tel" name="whatsapp" placeholder="(99) 99999-9999"></label>
+          <label>Instagram <input type="text" name="instagram" placeholder="@perfil"></label>
+        </div>
+        <label>O que você precisa? <small>(opcional)</small>
+          <textarea name="notes" rows="2" placeholder="Ex.: organizar o Instagram e o WhatsApp da minha barbearia"></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary">Ir para o pagamento seguro →</button>
+        <p class="co-note" data-co-note></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase.js"></script>
   <script src="assets/js/analytics.js"></script>
   <script src="assets/js/main.js"></script>
 </body>

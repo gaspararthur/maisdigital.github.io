@@ -19,6 +19,8 @@ const PLAN_CHECKOUT = {
   automacao: 'https://mpago.la/1ecZjRS'
   // 'customizado' não tem valor fixo: sempre vai pelo WhatsApp.
 };
+// Valor mensal de cada plano (usado no checkout pré-pagamento).
+const PLAN_VALUES = { presenca: 397, atendimento: 797, automacao: 1497 };
 
 /* Aplica número e e-mail configurados em TODOS os links do site,
    para você nunca precisar editar o contato em vários lugares. */
@@ -29,9 +31,33 @@ document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
   link.href = `mailto:${CONTACT_EMAIL}`;
 });
 
-/* Conecta os botões de plano ao checkout de assinatura.
-   Com link configurado → vai direto para o pagamento.
-   Sem link → abre o WhatsApp já pedindo aquele plano. */
+/* ------------------------------------------------------------
+   CHECKOUT PRÉ-PAGAMENTO
+   Quando o plano tem link de pagamento E o Supabase está pronto,
+   abrimos um mini-formulário que guarda o que o cliente pediu
+   (em `pending_checkouts`) ANTES de ir pro pagamento. Depois que
+   o pagamento é aprovado, a Edge Function `mp-webhook` casa esses
+   dados pelo e-mail e cria o cliente sozinho no painel.
+   Sem Supabase configurado, o botão vai direto pro pagamento.
+   ------------------------------------------------------------ */
+const coModal = document.querySelector('[data-checkout-modal]');
+const coForm = document.querySelector('[data-checkout-form]');
+let coTarget = null;
+
+function openCheckout(target) {
+  coTarget = target;
+  coForm?.reset();
+  const planEl = coModal.querySelector('[data-co-plan]');
+  const valEl = coModal.querySelector('[data-co-value]');
+  if (planEl) planEl.textContent = target.name;
+  if (valEl) valEl.textContent = target.value ? `R$ ${target.value}/mês` : '';
+  const noteEl = coModal.querySelector('[data-co-note]');
+  if (noteEl) noteEl.textContent = '';
+  coModal.hidden = false;
+  document.body.classList.add('menu-open');
+}
+function closeCheckout() { if (coModal) { coModal.hidden = true; document.body.classList.remove('menu-open'); } }
+
 document.querySelectorAll('[data-plan-id]').forEach(btn => {
   const id = btn.dataset.planId;
   const name = btn.dataset.planName || 'um plano';
@@ -39,6 +65,13 @@ document.querySelectorAll('[data-plan-id]').forEach(btn => {
 
   if (link && link.trim()) {
     btn.href = link.trim();
+    // Com Supabase + modal disponíveis, coletamos os dados antes de pagar.
+    if (window.db && coModal) {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openCheckout({ id, name, link: link.trim(), value: PLAN_VALUES[id] });
+      });
+    }
   } else {
     const msg = encodeURIComponent(`Olá! Tenho interesse no plano *${name}* da Mais Digital. Pode me passar os detalhes?`);
     btn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
@@ -51,6 +84,38 @@ document.querySelectorAll('[data-plan-id]').forEach(btn => {
     if (typeof gtag === 'function') gtag('event', 'plano_clicado', { plano: name });
     if (typeof fbq === 'function') fbq('track', 'InitiateCheckout', { content_name: name });
   });
+});
+
+coModal?.addEventListener('click', (e) => { if (e.target === coModal) closeCheckout(); });
+coModal?.querySelectorAll('[data-co-close]').forEach(b => b.addEventListener('click', closeCheckout));
+
+coForm?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!coTarget) return;
+  const note = coForm.querySelector('[data-co-note]');
+  const submitBtn = coForm.querySelector('[type="submit"]');
+  submitBtn.disabled = true;
+  note.textContent = 'Salvando e redirecionando para o pagamento seguro...';
+
+  const fd = Object.fromEntries(new FormData(coForm));
+  try {
+    if (window.db) {
+      await window.db.from('pending_checkouts').insert([{
+        email: (fd.email || '').trim().toLowerCase(),
+        client_name: fd.client_name?.trim() || null,
+        company_name: fd.company_name?.trim() || null,
+        whatsapp: fd.whatsapp?.trim() || null,
+        instagram: fd.instagram?.trim() || null,
+        plan: coTarget.name,
+        monthly_value: coTarget.value || null,
+        notes: fd.notes?.trim() || null,
+        source: 'Site'
+      }]);
+    }
+  } catch (_) { /* mesmo que falhe o registro, não bloqueamos a venda */ }
+
+  // Vai para o checkout do Mercado Pago (pagamento acontece lá).
+  window.location.href = coTarget.link;
 });
 
 /* Página de obrigado (pós-pagamento): personaliza com o plano vindo

@@ -335,6 +335,25 @@ h1 { font-size: clamp(2.45rem, 6vw, 4.9rem); line-height: .98; letter-spacing: -
   .segments-grid { grid-template-columns: 1fr; }
 }
 
+/* CHECKOUT PRÉ-PAGAMENTO (modal) */
+.co-modal { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 20px; background: rgba(2,6,23,.62); backdrop-filter: blur(5px); }
+.co-modal[hidden] { display: none; }
+.co-box { position: relative; width: min(520px, 100%); max-height: 92vh; overflow: auto; padding: 30px; border-radius: 26px; background: white; box-shadow: 0 40px 90px rgba(0,0,0,.4); }
+.co-close { position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--border); background: white; cursor: pointer; font-size: 14px; }
+.co-close:hover { border-color: #DC2626; color: #DC2626; }
+.co-box h3 { font-size: 24px; letter-spacing: -.04em; margin: 8px 0; }
+.co-box h3 span { color: var(--blue); }
+.co-sub { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+.co-box form { display: grid; gap: 12px; }
+.co-box label { display: grid; gap: 6px; font-size: 13px; font-weight: 700; color: var(--dark); }
+.co-box label small { color: var(--muted); font-weight: 500; }
+.co-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.co-box input, .co-box textarea { border: 1px solid var(--border); border-radius: 12px; padding: 11px 13px; font: inherit; outline: none; background: white; color: var(--dark); }
+.co-box input:focus, .co-box textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(26,86,219,.12); }
+.co-box .btn { width: 100%; margin-top: 6px; }
+.co-note { color: var(--blue); font-size: 13px; font-weight: 600; min-height: 16px; }
+@media (max-width: 480px) { .co-grid { grid-template-columns: 1fr; } .co-box { padding: 24px 20px; } }
+
 /* Acessibilidade: respeitar quem prefere menos animação */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
