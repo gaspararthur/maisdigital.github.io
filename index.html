@@ -324,6 +324,47 @@
       position: relative;
     }
 
+    .custom-plan-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 22px;
+    }
+
+    .custom-plan-card {
+      width: min(100%, 540px);
+      text-align: center;
+      border-color: rgba(26,86,219,0.35);
+      box-shadow: 0 10px 30px rgba(15,23,42,0.06);
+    }
+
+    .custom-plan-card .plan-price {
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .custom-plan-card .currency {
+      font-size: 14px;
+      letter-spacing: 0.3px;
+    }
+
+    .custom-plan-card .plan-features {
+      max-width: 360px;
+      margin: 0 auto 1.5rem;
+      text-align: left;
+    }
+
+    .custom-plan-card .plan-description {
+      color: var(--dm-gray);
+      font-size: 13px;
+      margin: -0.25rem auto 1rem;
+      max-width: 380px;
+    }
+
+    @media (max-width: 700px) {
+      .custom-plan-wrapper { margin-top: 16px; }
+      .custom-plan-card { width: 100%; }
+    }
+
     .plan-card.featured {
       border-color: var(--dm-blue);
       border-width: 2px;
@@ -693,7 +734,7 @@
     <div class="service-card">
       <div class="service-icon">📌</div>
       <h3>Presença Digital</h3>
-      <p>Organizamos Instagram, bio, destaques, identidade visual básica e Google Meu Negócio para sua empresa passar mais confiança.</p>
+      <p>Organizamos Instagram, bio, destaques e identidade visual básica para sua empresa passar mais confiança.</p>
     </div>
     <div class="service-card">
       <div class="service-icon">💬</div>
@@ -729,6 +770,11 @@
       <div class="service-icon">📊</div>
       <h3>Relatórios Simples</h3>
       <p>Resumo mensal com o que foi feito, principais resultados, contatos gerados, pontos de melhoria e próximos ajustes.</p>
+    </div>
+        <div class="service-card">
+      <div class="service-icon">💵</div>
+      <h3>Tráfego Pago </h3>
+      <p>Colocamos anúncios sobre sua marca, gerenciamos e otimizamos para maximizar seu retorno sobre investimento. Assim, seu negócio passará mais confiança.</p>
     </div>
   </div>
   </div>
@@ -794,6 +840,23 @@
         <li>Dashboard simples de acompanhamento</li>
       </ul>
       <a href="#contato" class="plan-btn" style="display:block;text-align:center;text-decoration:none;">Contratar plano</a>
+    </div>
+  </div>
+
+  <div class="custom-plan-wrapper">
+    <div class="plan-card custom-plan-card">
+      <div class="plan-name">Plano customizado</div>
+      <div class="plan-price">
+        <span class="currency">A partir de R$</span>
+        <span class="amount">300</span>
+        <span class="period">/mês</span>
+      </div>
+      <p class="plan-description">Monte uma solução sob medida para o que sua empresa realmente precisa agora.</p>
+      <ul class="plan-features">
+        <li>Escolha serviços avulsos ou combine presença digital, WhatsApp, CRM, automação e tráfego pago.</li>
+        <li>Ideal para quem quer começar pequeno e evoluir aos poucos.</li>
+      </ul>
+      <a href="#contato" class="plan-btn" style="display:block;text-align:center;text-decoration:none;">Montar meu plano</a>
     </div>
   </div>
   </div>
