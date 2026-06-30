@@ -1,0 +1,13 @@
+{
+  "name": "mais-digital-site",
+  "version": "1.0.0",
+  "description": "Site profissional da Mais Digital com frontend organizado e backend simples para captação de leads.",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.3"
+  }
+}
