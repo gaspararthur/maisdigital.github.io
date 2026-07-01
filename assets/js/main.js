@@ -14,7 +14,7 @@ const CONTACT_EMAIL = 'contato@maisdigital.com';
    WhatsApp já pedindo aquele plano — nunca dá em lugar nenhum.
    ------------------------------------------------------------ */
 const PLAN_CHECKOUT = {
-  presenca: 'https://mpago.la/2wSSovJ',     // ex.: https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=...
+  presenca: 'https://mpago.la/1SFvKYC',     // ex.: https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=...
   atendimento: 'https://mpago.la/2xYmKnu',
   automacao: 'https://mpago.la/1ecZjRS'
   // 'customizado' não tem valor fixo: sempre vai pelo WhatsApp.
