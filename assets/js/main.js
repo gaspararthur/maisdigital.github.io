@@ -94,28 +94,56 @@ coForm?.addEventListener('submit', async (e) => {
   if (!coTarget) return;
   const note = coForm.querySelector('[data-co-note]');
   const submitBtn = coForm.querySelector('[type="submit"]');
+
+  // Consentimento LGPD (obrigatório também no checkout)
+  const consent = coForm.querySelector('[name="consent"]');
+  if (consent && !consent.checked) {
+    note.textContent = 'Aceite a Política de Privacidade para continuar.';
+    return;
+  }
+
   submitBtn.disabled = true;
-  note.textContent = 'Salvando e redirecionando para o pagamento seguro...';
-
+  note.textContent = 'Gerando sua assinatura segura...';
   const fd = Object.fromEntries(new FormData(coForm));
-  try {
-    if (window.db) {
-      await window.db.from('pending_checkouts').insert([{
-        email: (fd.email || '').trim().toLowerCase(),
-        client_name: fd.client_name?.trim() || null,
-        company_name: fd.company_name?.trim() || null,
-        whatsapp: fd.whatsapp?.trim() || null,
-        instagram: fd.instagram?.trim() || null,
-        plan: coTarget.name,
-        monthly_value: coTarget.value || null,
-        notes: fd.notes?.trim() || null,
-        source: 'Site'
-      }]);
-    }
-  } catch (_) { /* mesmo que falhe o registro, não bloqueamos a venda */ }
 
-  // Vai para o checkout do Mercado Pago (pagamento acontece lá).
-  window.location.href = coTarget.link;
+  try {
+    // Cria a ASSINATURA RECORRENTE via Edge Function (que grava os dados
+    // e devolve o link do Mercado Pago já vinculado ao checkout).
+    const res = await fetch(`${window.SUPABASE_URL}/functions/v1/create-subscription`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        apikey: window.SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${window.SUPABASE_ANON_KEY}`
+      },
+      body: JSON.stringify({
+        planId: coTarget.id,
+        email: (fd.email || '').trim(),
+        client_name: fd.client_name,
+        company_name: fd.company_name,
+        whatsapp: fd.whatsapp,
+        instagram: fd.instagram,
+        notes: fd.notes,
+        consent: !!(consent && consent.checked)
+      })
+    });
+    const data = await res.json().catch(() => ({}));
+    if (res.ok && data.init_point) {
+      window.location.href = data.init_point; // vai pro pagamento da assinatura
+      return;
+    }
+    throw new Error(data.error || 'falha ao gerar assinatura');
+  } catch (err) {
+    // Não perde a venda: cai pro link estático do plano (se existir).
+    if (typeof gtag === 'function') gtag('event', 'checkout_error', { motivo: String(err.message || err) });
+    if (coTarget.link) {
+      note.textContent = 'Redirecionando para o pagamento...';
+      window.location.href = coTarget.link;
+    } else {
+      note.textContent = 'Não foi possível gerar o pagamento agora. Fale com a gente no WhatsApp.';
+      submitBtn.disabled = false;
+    }
+  }
 });
 
 /* Página de obrigado (pós-pagamento): personaliza com o plano vindo
